@@ -19,6 +19,7 @@ There's some hard code here and there too.
 WebSockets would be an issue here but I think it could be handled.
 
 Grafana is configured so auth is turned off since the proxy handles that.
+Grafana has a proxy authentication method.
 Again only admins are expected to look at this.
 Non admin's get a 403, it's probably better to keep it from appearing to them in the dropdown.
 
