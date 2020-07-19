@@ -25,6 +25,8 @@ services:
       - CONFIGPROXY_AUTH_TOKEN=w93vqacY7dUuevv62x5XEFDcCVu0mIU-fgDmIdIM
       - PROMETHEUS_AUTH_TOKEN=H245DdjyhkfLuAGYSJUs.2JaYoSfgoMfn-3BWIsW
       - GRAFANAPROXY_AUTH_TOKEN=-BdA3428KVfbTVn9xO3O1jBPwh8b-0ToqO.ggkHE
+    ports:
+      - 8000:8000
     volumes:
       - ./jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py
   prometheus:
@@ -32,10 +34,3 @@ services:
     image: prom/prometheus:latest
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
-  proxy:
-    container_name: proxy
-    image: jupyterhub/configurable-http-proxy:latest
-    environment:
-      - CONFIGPROXY_AUTH_TOKEN=w93vqacY7dUuevv62x5XEFDcCVu0mIU-fgDmIdIM
-    ports:
-      - 8000:8000

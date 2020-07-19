@@ -410,9 +410,9 @@ c.JupyterHub.hub_connect_url = 'http://hub:8081'
 #    - default: jupyterhub.proxy.ConfigurableHTTPProxy
 #c.JupyterHub.proxy_class = 'jupyterhub.proxy.ConfigurableHTTPProxy'
 
-c.ConfigurableHTTPProxy.should_start = False
-c.ConfigurableHTTPProxy.auth_token = os.environ.get("CONFIGPROXY_AUTH_TOKEN")
-c.ConfigurableHTTPProxy.api_url = 'http://proxy:8001'
+#c.ConfigurableHTTPProxy.should_start = False
+#c.ConfigurableHTTPProxy.auth_token = os.environ.get("CONFIGPROXY_AUTH_TOKEN")
+#c.ConfigurableHTTPProxy.api_url = 'http://proxy:8001'
 
 ## DEPRECATED since version 0.8. Use ConfigurableHTTPProxy.command
 #c.JupyterHub.proxy_cmd = []
