@@ -7,3 +7,7 @@ RUN \
 RUN \
     adduser -q --gecos "" --disabled-password admin && \
     echo admin:admin | chpasswd
+
+RUN \
+    pip3 install --no-cache-dir notebook
+
