@@ -1,0 +1,41 @@
+version: "3"
+services:
+  grafana:
+    container_name: grafana
+    image: grafana/grafana:latest
+    volumes:
+      - ./grafana.ini:/etc/grafana/grafana.ini
+      - ./datasource.yaml:/etc/grafana/provisioning/datasources/datasource.yaml
+    links:
+      - prometheus
+  grafana-proxy:
+    command: ["python3", "proxy.py", "http://grafana:3000/"]
+    container_name: grafana-proxy
+    image: jupyterhub/jupyterhub:latest
+    environment:
+      - JUPYTERHUB_API_TOKEN=-BdA3428KVfbTVn9xO3O1jBPwh8b-0ToqO.ggkHE
+      - JUPYTERHUB_API_URL=http://hub:8081/hub/api
+    volumes:
+      - ./proxy.py:/srv/jupyterhub/proxy.py
+  hub:
+    build: .
+    container_name: hub
+    image: hub:latest
+    environment:
+      - CONFIGPROXY_AUTH_TOKEN=w93vqacY7dUuevv62x5XEFDcCVu0mIU-fgDmIdIM
+      - PROMETHEUS_AUTH_TOKEN=H245DdjyhkfLuAGYSJUs.2JaYoSfgoMfn-3BWIsW
+      - GRAFANAPROXY_AUTH_TOKEN=-BdA3428KVfbTVn9xO3O1jBPwh8b-0ToqO.ggkHE
+    volumes:
+      - ./jupyterhub_config.py:/srv/jupyterhub/jupyterhub_config.py
+  prometheus:
+    container_name: prometheus
+    image: prom/prometheus:latest
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+  proxy:
+    container_name: proxy
+    image: jupyterhub/configurable-http-proxy:latest
+    environment:
+      - CONFIGPROXY_AUTH_TOKEN=w93vqacY7dUuevv62x5XEFDcCVu0mIU-fgDmIdIM
+    ports:
+      - 8000:8000

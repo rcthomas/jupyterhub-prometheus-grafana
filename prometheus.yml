@@ -1,0 +1,15 @@
+# global config
+global:
+  scrape_interval:     15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+
+# A scrape configuration containing exactly one endpoint to scrape:
+scrape_configs:
+  - bearer_token: H245DdjyhkfLuAGYSJUs.2JaYoSfgoMfn-3BWIsW
+    job_name: 'jupyterhub'
+    metrics_path: "/hub/metrics"
+    static_configs:
+      - targets: ['hub:8081'] # the address of an application that exposes metrics for prometheus
+        labels:
+          alias: "hub"
+
