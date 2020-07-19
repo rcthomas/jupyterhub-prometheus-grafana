@@ -62,6 +62,7 @@ class ProxyHandler(HubAuthenticated, web.RequestHandler):
             client_uri += '?' + self.request.query
 
         headers = self.proxy_request_headers()
+        headers["X-WEBAUTH-USER"] = "admin"
 
         req = httpclient.HTTPRequest(
             client_uri, method=self.request.method, body=body,
